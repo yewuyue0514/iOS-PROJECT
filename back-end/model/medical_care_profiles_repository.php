@@ -47,17 +47,15 @@ class MedicalCareProfilesRepository {
     // return profile match the child id, or NULL if no match
     public static function getMedicalCareProfileByChildId($childId) {
         global $db;
-        $query = "SELECT medical_care_id FROM daycaredb.child_profiles WHERE id = $childId";
-        $result = $db->query($query);
-        $medical_care_profile_id = NULL;
-        if ($result->rowCount() !== 1) {
+        $queryToGetMedicalCareId = "SELECT medical_care_id FROM daycaredb.child_profiles WHERE id = $childId";
+        $resultForMedicalCareId = $db->query($queryToGetMedicalCareId);
+        if ($resultForMedicalCareId->rowCount() !== 1) {
             return NULL;
         }
-        $row = $result->fetch();
-        $medical_care_profile_id = $row['medical_care_id'];
+        $rowForMedicalCareId = $resultForMedicalCareId->fetch();
+        $medical_care_profile_id = $rowForMedicalCareId['medical_care_id'];
         $query = "SELECT * FROM daycaredb.medical_care_profiles WHERE id = $medical_care_profile_id";
         $result = $db->query($query);
-        $medical_care_profile_id = NULL;
         if ($result->rowCount() !== 1) {
             return NULL;
         }
