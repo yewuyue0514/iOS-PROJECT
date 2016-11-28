@@ -50,7 +50,6 @@ class ChildProfilesRepository {
     // return one record by first name and last name, or NULL if no match 
     public static function getChildsByName($fname, $lname) {
         global $db;
-        echo "$fname $lname";
         $query = "SELECT * FROM daycaredb.child_profiles WHERE first_name = '$fname' AND last_name = '$lname'";
         $result = $db->query($query);
         if ($result) {
@@ -65,7 +64,6 @@ class ChildProfilesRepository {
             }
             return $childs;
         } else {
-            echo '111';
             return NULL;
         }
     }

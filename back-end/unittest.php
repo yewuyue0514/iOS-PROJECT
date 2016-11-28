@@ -18,14 +18,15 @@ include_once 'db/dbcontext.php';
 require 'db/db_connect.php';
 $db = DBContext::getDB();
 
+
 //$child = ChildProfilesRepository::getChildById(1);
 //$childs = ChildProfilesRepository::getChilds();
 //$childs = ChildProfilesRepository::getChildsByName('yue','yang');
 //$childs = ChildProfilesRepository::getChildsByChineseName('yue yang');  
 //$childs = ChildProfilesRepository::getChildsByPhone(5103121234); 
 //$rows = ChildProfilesRepository::deleteChild(1); echo "$rows --------";
-//$child = new ChildProfiles('',2,2,2,2,1,1,'2016-01-01','2016-07-12','','','we', 'hua','yue yang', 'bb','m','1-1-1','2015-09-15','english','123 ss', 5103122334,'studing');
-//$childid = ChildProfilesRepository::addChild($child);
+$child = new ChildProfiles('',2,2,2,2,1,1,'2016-01-01','2016-07-12','','','we', 'hua','yue yang', 'bb','m','1-1-1','2015-09-15','english','123 ss', 5103122334,'studing');
+$childid = ChildProfilesRepository::addChild($child);
 $childs = ChildProfilesRepository::getChilds();
 $hasChild = isset($childs);
 if ($hasChild === false) {
@@ -42,7 +43,7 @@ if ($hasChild === false) {
     </head>
     <body>
         <h1>DAYCAREDB TEST</h1>
-        <h1>get child profile while child id equal to 1</h1>
+        <h1>get child profile </h1>
         <?php foreach ($childs as $child) : ?>
         <?php echo $child->getId() ?><br>
         <?php echo $child->getMom_id() ?><br>

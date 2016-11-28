@@ -1,5 +1,13 @@
-
-
+<?php
+/*  
+ * Student Info: Name=Wei Jin, ID=9983
+ * Subject: NPU_2016_Fall_CS556(A)_Team_Project
+ * Author: Wei Jin 
+ * Filename: db_connect.php 
+ * Date and Time: Nov 20, 2016 5:12:08 PM 
+ * Project Name: CS556_Team_Project 
+ */ 
+?>
 
 <html>
     <head>
