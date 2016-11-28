@@ -20,8 +20,8 @@ class DailyRecordsRepository {
         foreach ($result as $row) {
             //impelement the daily record class
             $dailyrecord = new DailyRecords($row['id'], $row['child_id'], $row['record_date']
-                , $row['emotion'], $row['sleep_duration'], $row['body_temperature'], 
-                 $row['defecation'], $row['meal'], $row['activity'], $row['defecation_at_home'], $row['sleep_status']);
+                    , $row['emotion'], $row['sleep_duration'], $row['body_temperature'], $row['defecation']
+                    , $row['meal'], $row['activity'], $row['defecation_at_home'], $row['sleep_status']);
             $dailyrecords[] = $dailyrecord;
         }
         return $dailyrecords;
@@ -30,32 +30,45 @@ class DailyRecordsRepository {
     // return one record by id, or NULL if no match
     public static function getDailyRecordById($id) {
         global $db;
-        $query = "SELECT * FROM daycaredb.daily_records WHERE id = $id";
-        $result = $db->query($query);
-        if ($result) {
-            $row = $result->fetch();
-            $dailyrecord = new DailyRecords($row['id'], $row['child_id'], $row['record_date'], $row['emotion'], $row['sleep_duration'], $row['body_temperature'], $row['defecation'], $row['meal'], $row['activity'], $row['defecation_at_home'], $row['sleep_status']);
-            return $dailyrecord;
-        } else {
-            return NULL;
+        $query = "SELECT count(*) FROM daycaredb.daily_records WHERE id = $id";
+        if ($result = $db->query($query)) {
+            // Check the number of rows that match the SELECT statement 
+            if ($result->fetchColumn() === 1) {
+                // Issue the real SELECT statement and work with the results 
+                $query = "SELECT * FROM daycaredb.daily_records WHERE id = $id";
+                $result = $db->query($query);
+                $row = $result->fetch();
+                $dailyrecord = new DailyRecords($row['id'], $row['child_id'], $row['record_date']
+                        , $row['emotion'], $row['sleep_duration'], $row['body_temperature'], $row['defecation']
+                        , $row['meal'], $row['activity'], $row['defecation_at_home'], $row['sleep_status']);
+                return $dailyrecord;
+            } else {
+                return NULL;
+            }
         }
     }
 
     // return all records match the child id, or NULL if no match
     public static function getDailyRecordsByChildId($childId) {
         global $db;
-        $dailyrecords = array();
-        $query = "SELECT * FROM daycaredb.daily_records WHERE child_id = $childId";
-        $result = $db->query($query);
-        if ($result) {
-            foreach ($result as $row) {
-                //impelement the daily record class
-                $dailyrecord = new DailyRecords($row['id'], $row['child_id'], $row['record_date'], $row['emotion'], $row['sleep_duration'], $row['body_temperature'], $row['defecation'], $row['meal'], $row['activity'], $row['defecation_at_home'], $row['sleep_status']);
-                $dailyrecords[] = $dailyrecord;
+        $query = "SELECT count(*) FROM daycaredb.daily_records WHERE child_id = $childId";
+        if ($result = $db->query($query)) {
+            // Check the number of rows that match the SELECT statement 
+            if ($result->fetchColumn() > 0) {
+                // Issue the real SELECT statement and work with the results 
+                $dailyrecords = array();
+                $query = "SELECT * FROM daycaredb.daily_records WHERE child_id = $childId";
+                foreach ($db->query($query) as $row) {
+                    //impelement the daily record class
+                    $dailyrecord = new DailyRecords($row['id'], $row['child_id'], $row['record_date']
+                            , $row['emotion'], $row['sleep_duration'], $row['body_temperature'], $row['defecation']
+                            , $row['meal'], $row['activity'], $row['defecation_at_home'], $row['sleep_status']);
+                    $dailyrecords[] = $dailyrecord;
+                }
+                return $dailyrecords;
+            } else {
+                return NULL;
             }
-            return $dailyrecords;
-        } else {
-            return NULL;
         }
     }
 
@@ -65,20 +78,27 @@ class DailyRecordsRepository {
         global $db;
         $dailyrecords = array();
         if ($finalDate == NULL) {
+            $checkquery = "SELECT count(*) FROM daycaredb.daily_records WHERE record_date = '$initialDate'";
             $query = "SELECT * FROM daycaredb.daily_records WHERE record_date = '$initialDate'";
         } else {
+            $checkquery = "SELECT count(*) FROM daycaredb.daily_records WHERE record_date = '$initialDate' AND '$finalDate'";
             $query = "SELECT * FROM daycaredb.daily_records WHERE record_date BETWEEN '$initialDate' AND '$finalDate'";
         }
-        $result = $db->query($query);
-        if ($result) {
-            foreach ($result as $row) {
-                //impelement the daily record class
-                $dailyrecord = new DailyRecords($row['id'], $row['child_id'], $row['record_date'], $row['emotion'], $row['sleep_duration'], $row['body_temperature'], $row['defecation'], $row['meal'], $row['activity'], $row['defecation_at_home'], $row['sleep_status']);
-                $dailyrecords[] = $dailyrecord;
+        if ($result = $db->query($checkquery)) {
+            // Check the number of rows that match the SELECT statement 
+            if ($result->fetchColumn() > 0) {
+                // Issue the real SELECT statement and work with the results 
+                foreach ($db->query($query) as $row) {
+                    //impelement the daily record class
+                    $dailyrecord = new DailyRecords($row['id'], $row['child_id'], $row['record_date']
+                            , $row['emotion'], $row['sleep_duration'], $row['body_temperature'], $row['defecation']
+                            , $row['meal'], $row['activity'], $row['defecation_at_home'], $row['sleep_status']);
+                    $dailyrecords[] = $dailyrecord;
+                }
+                return $dailyrecords;
+            } else {
+                return NULL;
             }
-            return $dailyrecords;
-        } else {
-            return NULL;
         }
     }
 
@@ -86,15 +106,16 @@ class DailyRecordsRepository {
     public static function deleteDailyRecordById($id) {
         global $db;
         $query = "DELETE FROM daycaredb.daily_records WHERE id = $id";
-        $row_count = $db->exec($query);   
+        $row_count = $db->exec($query);
         return $row_count;
     }
 
     // take a $signInRecord as parameter
     // insert into DB and return the "id" as integer which auto assign by the database
     // or return 0 if insert failed
-    public static function addDailyRecord($dailyRecord) {
+    public static function addDailyRecord($json) {
         global $db;
+        $dailyRecord = DailyRecords::initFromjson($json);
         $child_id = $dailyRecord->getChild_id();
         $record_date = $dailyRecord->getRecord_date();
         $emotion = $dailyRecord->getEmotion();

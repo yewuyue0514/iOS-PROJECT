@@ -9,8 +9,8 @@
  * Project Name: CS556_Team_Project 
  */ 
 $dsn = 'mysql:host=localhost;dbname=daycaredb';
-$username = 'root';
-$password = 'johnson5414';
+$username = 'admin';
+$password = 'pass@word';
 
 try {
     $db = new PDO($dsn, $username, $password);

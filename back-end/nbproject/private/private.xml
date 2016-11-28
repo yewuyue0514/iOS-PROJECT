@@ -2,11 +2,15 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+<<<<<<< HEAD
+        <group/>
+=======
         <group>
             <file>file:/C:/Users/mayfa/Documents/NetBeansProjects/CS556_Team_Project/back-end/testing/medical_care_profiles_repository_test.php</file>
             <file>file:/C:/Users/mayfa/Documents/NetBeansProjects/CS556_Team_Project/back-end/model/primary_contact_profiles_repository.php</file>
             <file>file:/C:/Users/mayfa/Documents/NetBeansProjects/CS556_Team_Project/back-end/db/db_context.php</file>
             <file>file:/C:/Users/mayfa/Documents/NetBeansProjects/CS556_Team_Project/back-end/db/db_connect.php</file>
         </group>
+>>>>>>> 99c4d869dff5f4847dfab4dce025edd13e288aa4
     </open-files>
 </project-private>

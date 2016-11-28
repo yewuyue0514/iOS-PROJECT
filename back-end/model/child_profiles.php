@@ -39,6 +39,20 @@ class ChildProfiles {
         $this->phone = $phone;
         $this->child_status = $child_status;
     }
+    function initFromJson($json){
+        $data = json_decode($json);
+        $newchild = new self($data->id, $data->mom_id, $data->dad_id, $data->emer_1_id, $data->emer_2_id
+                            , $data->medical_history_id, $data->medical_care_id, $data->enrollment_date, $data->start_date
+                            , $data->withdraw_date, $data->withdraw_reason, $data->first_name, $data->last_name
+                            , $data->chinese_name, $data->nick_name, $data->sex, $data->age, $data->birthday
+                            , $data->primary_language, $data->address
+                            , $data->phone, $data->child_status);
+        return $newchild;
+    }
+    function convertToJson(){
+        $data = $this->convertAsArray();        
+        return json_encode($data);
+    }
     function getId() {
         return $this->id;
     }
@@ -214,6 +228,31 @@ class ChildProfiles {
     function setChild_status($child_status) {
         $this->child_status = $child_status;
     }
-
+    function convertAsArray() {
+        $result = array();
+        $result['id'] = $this->getId();
+        $result['mom_id'] = $this->getMom_id();
+        $result['dad_id'] = $this->getDad_id();
+        $result['emer_1_id'] = $this->getEmer_1_id();
+        $result['emer_2_id'] = $this->getEmer_2_id();
+        $result['medical_history_id'] = $this->getMedical_history_id();
+        $result['medical_care_id'] = $this->getMedical_care_id();
+        $result['enrollment_date'] = $this->getEnrollment_date();
+        $result['start_date'] = $this->getStart_date();
+        $result['withdraw_date'] = $this->getWithdraw_date();
+        $result['withdraw_reason'] = $this->getWithdraw_reason();
+        $result['first_name'] = $this->getFirst_name();
+        $result['last_name'] = $this->getLast_name();
+        $result['chinese_name'] = $this->getChinese_name();
+        $result['nick_name'] = $this->getNick_name();
+        $result['sex'] = $this->getSex();
+        $result['age'] = $this->getAge();
+        $result['birthdate'] = $this->getBirthday();
+        $result['primary_language'] = $this->getPrimary_language();
+        $result['address'] = $this->getAddress();
+        $result['phone'] = $this->getPhone();
+        $result['status'] = $this->getChild_status();
+        return $result;
+    }
 
 }

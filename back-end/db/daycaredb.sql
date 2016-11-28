@@ -265,7 +265,7 @@ insert into daycaredb.medical_care_profiles values
 insert into daycaredb.child_profiles values
 (1,2,1,1,2,1,1,'2016-01-01','2016-02-01','2016-03-01','go back china','yue', 'yang','yue yang', 'cc','F','3-1-1','2012-03-01','chinese','123 ss', 5103121234,'drop');
 # (2,2,2,2,2,2,2,'2016-01-01','2016-07-12','','','we', 'hua','yue yang', 'bb','m','1-1-1','2015-09-15','english','123 ss', 5103122334,'studing'),
-# (3,3,3,3,3,3,3,'2016-01-01','2016-11-09','','','due', 'xaing','yue yang', 'aa','F','5-1-1','2012-14-09','chinese','123 ss', 5133121234,'studing');
+# (3,3,3,3,3,3,3,'2016-01-01','2016-11-09','','','due', 'xaing','yue yang', 'aa','F','5-1-1','2012-12-09','chinese','123 ss', 5133121234,'studing');
 
 insert into daycaredb.signin_records values
 (1,1,'xi hua','2016-01-01 08:10:00','2016-01-01 16:10:00');

@@ -1,9 +1,9 @@
 <?php
 
 /*  
- * Student Info: Name=Arvin Mai, ID=10010
+ * Student Info: Name=Wei Jin, ID=9983
  * Subject: NPU_2016_Fall_CS556(A)_Team_Project
- * Author: yewuy 
+ * Author: wei jin 
  * Filename: dbcontext.php 
  * Date and Time: Nov 20, 2016 6:04:01 PM 
  * Project Name: CS556_Team_Project 
@@ -11,8 +11,8 @@
 class DBContext {
 
     private static $dsn = 'mysql:host=localhost;dbname=daycaredb';
-    private static $username = 'root';
-    private static $passwd = 'johnson5414';
+    private static $username = 'admin';
+    private static $passwd = 'pass@word';
     private static $db;
 
     private function __construct() {

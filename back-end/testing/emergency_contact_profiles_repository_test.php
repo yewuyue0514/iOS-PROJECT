@@ -8,10 +8,6 @@
  * Date and Time: Nov 20, 2016 9:44:34 PM 
  * Project Name: CS556_Team_Project 
  */ 
-include_once '../model/child_profiles_repository.php';
-include_once '../model/child_profiles.php';
-include_once '../model/daily_records_repository.php';
-include_once '../model/daily_records.php';
 include_once '../model/emergency_contact_profiles_repository.php';
 include_once '../model/emergency_contact_profiles.php';
 include_once '../db/db_context.php';
