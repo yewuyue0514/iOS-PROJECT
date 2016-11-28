@@ -27,7 +27,18 @@ class EmergencyContactProfiles {
         $this->cell_phone_number = $cell_phone_number;
         $this->note = $note;
     }
-
+    function initFromJson($json){
+        $data = json_decode($json);
+        $newDailyRecord = new self($data->id, $data->relationship, $data->first_name, $data->last_name
+                            , $data->chinese_name, $data->home_phone_number, $data->occupation, $data->work_time
+                            , $data->work_phone_number, $data->defecation_at_home
+                            , $data->primary_language, $data->cell_phone_number, $data->note);
+        return $newDailyRecord;
+    }
+    function convertToJson(){
+        $data = $this->convertAsArray();        
+        return json_encode($data);
+    }
     function getId() {
         return $this->id;
     }
@@ -115,5 +126,18 @@ class EmergencyContactProfiles {
     function setNote($note) {
         $this->note = $note;
     }
-
+    function converAsArray(){
+        $result = array();
+        $result['id'] =$this->getId();
+        $result['relationship'] = $this->getRelationship();
+        $result['first_name'] = $this->getFirst_name();
+        $result['last_name'] = $this->getLast_name();
+        $result['chinese_name'] = $this->getChinese_name();
+        $result['home_phone_number'] = $this->getHome_phone_number();
+        $result['occupation'] = $this->getOccupation();
+        $result['work_time'] = $this->getWork_time();
+        $result['work_phone_number'] = $this->getWork_phone_number();
+        $result['cell_phone_number'] = $this->getCell_phone_number();
+        $result['note'] = $this->getNote();
+    }
 }

@@ -27,7 +27,18 @@ class DailyRecords {
         $this->defecation_at_home = $defecation_at_home;
         $this->sleep_status = $sleep_status;
     }
-
+    function initFromJson($json){
+        $data = json_decode($json);
+        $newDailyRecord = new self($data->id, $data->child_id, $data->record_date, $data->emotion, $data->sleep_duration
+                            , $data->body_temperature, $data->defecation, $data->meal, $data->activity, $data->defecation_at_home
+                            , $data->primary_language, $data->address
+                            , $data->sleep_status);
+        return $newDailyRecord;
+    }
+    function convertToJson(){
+        $data = $this->convertAsArray();        
+        return json_encode($data);
+    }
     function getId() {
         return $this->id;
     }
@@ -115,5 +126,18 @@ class DailyRecords {
     function setSleep_status($sleep_status) {
         $this->sleep_status = $sleep_status;
     }
-
+    function converAsArray(){
+        $result = array();
+        $result['id'] =$this->getId();
+        $result['child_id'] = $this->getChild_id();
+        $result['record_date'] = $this->getRecord_date();
+        $result['emotion'] = $this->getEmotion();
+        $result['sleep_duration'] = $this->getSleep_duration();
+        $result['body_temperature'] = $this->getBody_temperature();
+        $result['defecation'] = $this->getDefecation();
+        $result['meal'] = $this->getMeal();
+        $result['activity'] = $this->getActivity();
+        $result['defecation_at_home'] = $this->getDefecation_at_home();
+        $result['sleep_status'] = $this->getSleep_status();
+    }
 }

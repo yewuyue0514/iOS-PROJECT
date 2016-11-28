@@ -9,25 +9,19 @@
  * Project Name: CS556_Team_Project 
  */ 
 
-
-
-include_once 'model/child_profiles_repository.php';
-include_once 'model/child_profiles.php';
-include_once 'model/daily_records_repository.php';
-include_once 'model/daily_records.php';
-include_once 'model/emergency_contact_profiles_repository.php';
-include_once 'model/emergency_contact_profiles.php';
-include_once 'db/dbcontext.php';
-require 'db/db_connect.php';
+include_once '../model/daily_records_repository.php';
+include_once '../model/daily_records.php';
+include_once '../db/db_context.php';
+require '../db/db_connect.php';
 $db = DBContext::getDB();
 
 //$dailyrecords = DailyRecordsRepository::getDailyRecords();
 //$dailyrecord = DailyRecordsRepository::getDailyRecordById(1);
 //$dailyrecords = DailyRecordsRepository::getDailyRecordsByChildId(1);
 //$dailyrecords = DailyRecordsRepository::getDailyRecordsByDate('2016-01-01','2016-01-02');
-$dailyRecord = new DailyRecords('',1,'2016-01-02','happy','12:02:28',37,2,'pork','reading',1,'ok');
-$dailyrecordsid = DailyRecordsRepository::addDailyRecord($dailyRecord);
-//$rows = DailyRecordsRepository::deleteDailyRecordById(1);
+//$dailyRecord = new DailyRecords('',1,'2016-01-02','happy','12:02:28',37,2,'pork','reading',1,'ok');
+//$dailyrecordsid = DailyRecordsRepository::addDailyRecord($dailyRecord);
+$rows = DailyRecordsRepository::deleteDailyRecordById(1);
 $dailyrecords = DailyRecordsRepository::getDailyRecords();
 $hasDailyrecords = isset($dailyrecords); 
 if ($hasDailyrecords === false) {

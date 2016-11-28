@@ -18,9 +18,9 @@ class EmergencyContactProfilesRepository {
         $result = $db->query($query);
         $emergencyContactProfiles = array();
         foreach ($result as $row) {
-            $emergencyContactProfile = new EmergencyContactProfiles($row['id'], $row['relationship'], $row['first_name'],
-                    $row['last_name'], $row['chinese_name'], $row['home_phone_number'], $row['occupation'], 
-                    $row['work_time'], $row['work_phone_number'], $row['cell_phone_number'], $row['note']);
+            $emergencyContactProfile = new EmergencyContactProfiles($row['id'], $row['relationship']
+                    , $row['first_name'], $row['last_name'], $row['chinese_name'], $row['home_phone_number']
+                    , $row['occupation'], $row['work_time'], $row['work_phone_number'], $row['cell_phone_number'], $row['note']);
             $emergencyContactProfiles[] = $emergencyContactProfile;
         }
         return $emergencyContactProfiles;
@@ -29,14 +29,21 @@ class EmergencyContactProfilesRepository {
     // return one record by id, or NULL if no match
     public static function getEmergencyContactProfileById($id) {
         global $db;
-        $query = "SELECT * FROM daycaredb.emergency_contact_profiles WHERE id = $id";
-        $result = $db->query($query);
-        if ($result) {
-            $row = $result->fetch();
-            $emergencyContactProfile = new EmergencyContactProfiles($row['id'],$row['relationship'], $row['first_name'], $row['last_name'], $row['chinese_name'], $row['home_phone_number'], $row['occupation'], $row['work_time'], $row['work_phone_number'], $row['cell_phone_number'], $row['note']);
-            return $emergencyContactProfile;
-        } else {
-            return NULL;
+        $query = "SELECT count(*) FROM daycaredb.emergency_contact_profiles WHERE id = $id";
+        if ($result = $db->query($query)) {
+            // Check the number of rows that match the SELECT statement 
+            if ($result->fetchColumn() === 1) {
+                // Issue the real SELECT statement and work with the results 
+                $query = "SELECT * FROM daycaredb.emergency_contact_profiles WHERE id = $id";
+                $result = $db->query($query);
+                $row = $result->fetch();
+                $emergencyContactProfile = new EmergencyContactProfiles($row['id'], $row['relationship']
+                        , $row['first_name'], $row['last_name'], $row['chinese_name'], $row['home_phone_number']
+                        , $row['occupation'], $row['work_time'], $row['work_phone_number'], $row['cell_phone_number'], $row['note']);
+                return $emergencyContactProfile;
+            } else {
+                return NULL;
+            }
         }
     }
 
@@ -47,32 +54,39 @@ class EmergencyContactProfilesRepository {
         $emergencyContactProfiles = array();
         $emergencyContactProfileid1 = $child->getEmer_1_id();
         $emergencyContactProfileid2 = $child->getEmer_2_id();
-        $query = "SELECT * FROM daycaredb.emergency_contact_profiles WHERE id = $emergencyContactProfileid1 or id = $emergencyContactProfileid2";
-        $result = $db->query($query);
-        if ($result) {
-            foreach ($result as $row) {
-                $emergencyContactProfile = new EmergencyContactProfiles($row['id'], $row['relationship'], $row['first_name'], $row['last_name'], $row['chinese_name'], $row['home_phone_number'], $row['occupation'], $row['work_time'], $row['work_phone_number'], $row['cell_phone_number'], $row['note']);
-                $emergencyContactProfiles[] = $emergencyContactProfile;
+        $query = "SELECT count(*) FROM daycaredb.emergency_contact_profiles WHERE id = $emergencyContactProfileid1 or id = $emergencyContactProfileid2";
+        if ($result = $db->query($query)) {
+            // Check the number of rows that match the SELECT statement 
+            if ($result->fetchColumn() > 0) {
+                // Issue the real SELECT statement and work with the results 
+                $query = "SELECT * FROM daycaredb.emergency_contact_profiles WHERE id = $emergencyContactProfileid1 or id = $emergencyContactProfileid2";
+                foreach ($db->query($query) as $row) {
+                    $emergencyContactProfile = new EmergencyContactProfiles($row['id'], $row['relationship']
+                        , $row['first_name'], $row['last_name'], $row['chinese_name'], $row['home_phone_number']
+                        , $row['occupation'], $row['work_time'], $row['work_phone_number'], $row['cell_phone_number'], $row['note']);
+                    $emergencyContactProfiles[] = $emergencyContactProfile;
+                }
+                return $emergencyContactProfiles;
+            } else {
+                return NULL;
             }
-            return $emergencyContactProfiles;
-        } else {
-            return NULL;
         }
     }
 
     // remove one record from DB, return 1 if record remove successed or 0 if failed
     public static function deleteEmergencyContactProfileById($id) {
         global $db;
-        $query = "DELETE FROM daycaredb.emergency_contact_profiles WHERE id = $id"; 
-        $row_count = $db->exec($query);   
+        $query = "DELETE FROM daycaredb.emergency_contact_profiles WHERE id = $id";
+        $row_count = $db->exec($query);
         return $row_count;
     }
 
     // take a $signInRecord as parameter
     // insert into DB and return the "id" as integer which auto assign by the database
     // or return 0 if insert failed
-    public static function addEmergencyContactProfile($emergencyContactProfile) {
+    public static function addEmergencyContactProfile($json) {
         global $db;
+        $emergencyContactProfile = EmergencyContactProfiles::initFromJson($json);
         $relationship = $emergencyContactProfile->getRelationship();
         $first_name = $emergencyContactProfile->getFirst_name();
         $last_name = $emergencyContactProfile->getLast_name();
@@ -87,7 +101,7 @@ class EmergencyContactProfilesRepository {
                 chinese_name, home_phone_number, occupation, work_time, work_phone_number, cell_phone_number, note) 
                 VALUES ('$relationship', '$first_name', '$last_name', 
                 '$chinese_name', $home_phone_number, '$occupation', '$work_time', $work_phone_number, $cell_phone_number, '$note')";
-        $db->query($query);echo $db->lastInsertId() . '----------';
+        $db->query($query);
         return $db->lastInsertId();
     }
 
