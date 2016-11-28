@@ -10,9 +10,9 @@
  */ 
 class DBContext {
 
-    private static $dsn = 'mysql:host=localhost;dbname=daycaredb';
-    private static $username = 'admin';
-    private static $passwd = 'pass@word';
+    private static $dsn = 'mysql:host=us-cdbr-azure-west-b.cleardb.com;port=3306;dbname=daycaredb';
+    private static $username = 'b117bca24bb891';
+    private static $passwd = '331a488c';
     private static $db;
 
     private function __construct() {

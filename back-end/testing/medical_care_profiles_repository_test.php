@@ -16,9 +16,9 @@ require '../db/db_connect.php';
 $db = DBContext::getDB();
 
 $query = "SHOW columns FROM daycaredb.medical_care_profiles;";
-$serverName = 'localhost';
-$username = 'root';
-$passwd = 'johnson5414';
+$serverName = 'us-cdbr-azure-west-b.cleardb.com:3306';
+$username = 'b117bca24bb891';
+$passwd = '331a488c';
 $dbName = 'daycaredb';
 $field = 'Field';
 $columnIndex = array();

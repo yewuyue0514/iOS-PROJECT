@@ -8,9 +8,9 @@
  * Date and Time: Nov 20, 2016 5:12:08 PM 
  * Project Name: CS556_Team_Project 
  */ 
-$dsn = 'mysql:host=localhost;dbname=daycaredb';
-$username = 'admin';
-$password = 'pass@word';
+$dsn = 'mysql:host=us-cdbr-azure-west-b.cleardb.com;port=3306;dbname=daycaredb';
+$username = 'b117bca24bb891';
+$password = '331a488c';
 
 try {
     $db = new PDO($dsn, $username, $password);

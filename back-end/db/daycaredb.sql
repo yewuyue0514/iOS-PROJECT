@@ -272,15 +272,3 @@ insert into daycaredb.signin_records values
 
 insert into daycaredb.daily_records values
 (1,1,'2016-01-01','happy','12:02:28',37,2,'chiken','reading',1,'good');
-
-
-GRANT SELECT, INSERT, DELETE, UPDATE
-ON daycaredb.*
-TO admin@localhost
-IDENTIFIED BY 'pass@word';
-
-
-GRANT SELECT
-ON daycaredb.child_profiles
-TO admin@localhost
-IDENTIFIED BY 'pass@word';
