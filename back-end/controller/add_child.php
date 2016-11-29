@@ -20,5 +20,6 @@ $newChild = new ChildProfiles(NULL, NULL, NULL, NULL, NULL, NULL, NULL, $_POST['
 $newArray = $newChild->convertAsArray();
 $newChildId = ChildProfilesRepository::addChild(json_encode($newArray));
 $child = ChildProfilesRepository::getChildById($newChildId);
-echo $child;
+$result = $child->convertAsArray();
+echo json_encode($child);
 ?>
