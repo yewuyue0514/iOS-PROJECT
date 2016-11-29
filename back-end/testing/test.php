@@ -29,3 +29,7 @@ $newChildId = ChildProfilesRepository::addChild(json_encode($newArray));
 $child = ChildProfilesRepository::getChildById($newChildId);
 $result = $child->convertAsArray();
 echo json_encode($child);
+
+
+
+
