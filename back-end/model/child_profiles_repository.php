@@ -24,7 +24,7 @@ class ChildProfilesRepository {
                     , $row['withdraw_date'], $row['withdraw_reason'], $row['first_name'], $row['last_name']
                     , $row['chinese_name'], $row['nick_name'], $row['sex'], $row['age'], $row['birthday'], $row['primary_language'], $row['address']
                     , $row['phone'], $row['child_status']);
-            $childs[] = $child->convertToJson();
+            $childs[] = $child;
         }
         return $childs;
     }
@@ -35,7 +35,7 @@ class ChildProfilesRepository {
         $query = "SELECT count(*) FROM daycaredb.child_profiles WHERE id = $childId";
         if ($result = $db->query($query)) { 
             // Check the number of rows that match the SELECT statement 
-            if ($result->fetchColumn() == 1) {
+            if ($result->fetchColumn() > 0) {
                 // Issue the real SELECT statement and work with the results 
                 $query = "SELECT * FROM daycaredb.child_profiles WHERE id = $childId";
                 $result = $db->query($query);
@@ -45,7 +45,7 @@ class ChildProfilesRepository {
                         , $row['withdraw_date'], $row['withdraw_reason'], $row['first_name'], $row['last_name']
                         , $row['chinese_name'], $row['nick_name'], $row['sex'], $row['age'], $row['birthday'], $row['primary_language'], $row['address']
                         , $row['phone'], $row['child_status']);
-                return $child->convertToJson();
+                return $child;
             } else {
                 return NULL;
             }
@@ -68,7 +68,7 @@ class ChildProfilesRepository {
                             , $row['withdraw_date'], $row['withdraw_reason'], $row['first_name'], $row['last_name']
                             , $row['chinese_name'], $row['nick_name'], $row['sex'], $row['age'], $row['birthday'], $row['primary_language'], $row['address']
                             , $row['phone'], $row['child_status']);
-                    $childs[] = $child->convertToJson();
+                    $childs[] = $child;
                 }
                 return $childs;
             } else {
@@ -93,7 +93,7 @@ class ChildProfilesRepository {
                             , $row['withdraw_date'], $row['withdraw_reason'], $row['first_name'], $row['last_name']
                             , $row['chinese_name'], $row['nick_name'], $row['sex'], $row['age'], $row['birthday'], $row['primary_language'], $row['address']
                             , $row['phone'], $row['child_status']);
-                    $childs[] = $child->convertToJson();
+                    $childs[] = $child;
                 }
                 return $childs;
             } else {
@@ -118,7 +118,7 @@ class ChildProfilesRepository {
                             , $row['withdraw_date'], $row['withdraw_reason'], $row['first_name'], $row['last_name']
                             , $row['chinese_name'], $row['nick_name'], $row['sex'], $row['age'], $row['birthday'], $row['primary_language'], $row['address']
                             , $row['phone'], $row['child_status']);
-                    $childs[] = $child->convertToJson();
+                    $childs[] = $child;
                 }
                 return $childs;
             } else {
