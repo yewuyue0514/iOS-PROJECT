@@ -14,7 +14,7 @@ $password = '331a488c';
 
 try {
     $db = new PDO($dsn, $username, $password);
-    echo 'MySQL DB daycaredb Connected.<br>';
+    //echo 'MySQL DB daycaredb Connected.<br>';
 } catch (PDOException $ex) {
     $error_msg = $ex->getMessage();
     include('db_error.php');
