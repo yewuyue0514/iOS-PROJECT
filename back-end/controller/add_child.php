@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Student Info: Name=Tsai-Chang Mai, ID=10010
  * Subject: NPU_2016_Fall_CS556(A)_Team_Project
@@ -17,16 +18,8 @@ $newChild = new ChildProfiles(NULL, NULL, NULL, NULL, NULL, NULL, NULL, $_POST['
         , $_POST['last_name'], $_POST['chinese_name'], $_POST['nick_name'], $_POST['sex'], $_POST['age']
         , $_POST['birthday'], $_POST['primary_language'], $_POST['address'], $_POST['phone'], $_POST['child_status']);
 $newChildJson = $newChild->convertToJson();
+$newArray = $newChild->convertAsArray();
+echo json_encode($newArray);
 $newChildId = ChildProfilesRepository::addChild($newChildJson);
 $child = ChildProfilesRepository::getChildById($newChildId);
 ?>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>Profile</title>
-    </head>
-    <body>
-        <?php echo $child; ?>
-    </body>
-</html>
-
