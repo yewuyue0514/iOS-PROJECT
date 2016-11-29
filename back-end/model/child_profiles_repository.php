@@ -35,7 +35,7 @@ class ChildProfilesRepository {
         $query = "SELECT count(*) FROM daycaredb.child_profiles WHERE id = $childId";
         if ($result = $db->query($query)) { 
             // Check the number of rows that match the SELECT statement 
-            if ($result->fetchColumn() === 1) {
+            if ($result->fetchColumn() == 1) {
                 // Issue the real SELECT statement and work with the results 
                 $query = "SELECT * FROM daycaredb.child_profiles WHERE id = $childId";
                 $result = $db->query($query);
