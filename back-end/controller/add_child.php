@@ -20,6 +20,6 @@ $newChild = new ChildProfiles(NULL, NULL, NULL, NULL, NULL, NULL, NULL, $_POST['
         , $_POST['birthday'], $_POST['primary_language'], $_POST['address'], $_POST['phone'], $_POST['child_status']);
 $newChildJson = $newChild->convertToJson();
 $newChildId = ChildProfilesRepository::addChild($newChildJson);
-$child = ChildProfilesRepository::getChildById($newChildId);
+$child = ChildProfilesRepository::getChildById(1);
 echo $child;
 
