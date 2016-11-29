@@ -163,10 +163,10 @@ class ChildProfilesRepository {
         $query = "INSERT INTO daycaredb.child_profiles (mom_id, dad_id, emer_1_id, emer_2_id,medical_history_id,
                   medical_care_id, enrollment_date, start_date, withdraw_date, withdraw_reason,
                   first_name, last_name, chinese_name, nick_name, sex, age, birthday, primary_language,
-                  address, phone, child_status) VALUES ($mom_id, $dad_id, $emer1id, $emer2id,$medicalhisid,
+                  address, phone, child_status) VALUES ($mom_id, $dad_id, $emer1id, $emer2id, $medicalhisid,
                   $medicalcareid, '$enrollment_date', '$start_date', '$withdraw_date', '$withdraw_reason',
                   '$first_name', '$last_name', '$chinese_name', '$nick_name', '$sex', '$age', '$birthday', '$primary_language',
-                  '$address', $phone, '$child_status')";
+                  '$address', '$phone', '$child_status')";
         $db->query($query);
         return $db->lastInsertId();
     }
