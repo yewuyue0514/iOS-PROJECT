@@ -18,11 +18,13 @@ $newChild = new ChildProfiles(NULL, NULL, NULL, NULL, NULL, NULL, NULL, $_POST['
         , $_POST['last_name'], $_POST['chinese_name'], $_POST['nick_name'], $_POST['sex'], $_POST['age']
         , $_POST['birthday'], $_POST['primary_language'], $_POST['address'], $_POST['phone'], $_POST['child_status']);
 $newArray = $newChild->convertAsArray();
-echo json_encode($newArray);
-$newChildId = ChildProfilesRepository::addChild($newChild);
-//$child = ChildProfilesRepository::getChildById($newChildId);
+//echo json_encode($newArray);
+//$newChildId = ChildProfilesRepository::addChild($newChild);
+$child = ChildProfilesRepository::getChildById(1);
+$result = $child->convertAsArray();
+echo json_encode($result);
 //$result = $child->convertAsArray();
-$result = array('id'=>$newChildId);
+//$result = array('id'=>$newChildId);
 //echo json_encode($result);
 // Read request parameters
 //$firstName = $_REQUEST["firstName"];
