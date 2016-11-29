@@ -136,9 +136,9 @@ class ChildProfilesRepository {
     }
 
     // take a $child as parameter, insert into DB and return the "id" as integer which auto assign by the database, 0 if failed
-    public static function addChild($child) {
+    public static function addChild($json) {
         global $db;        
-        //$child = ChildProfiles::initFromJson($json);
+        $child = ChildProfiles::initFromJson($json);
         $mom_id = $child->getMom_id();
         $dad_id = $child->getDad_id();
         $emer1id = $child->getEmer_1_id();
