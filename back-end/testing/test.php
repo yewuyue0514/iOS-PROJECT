@@ -20,6 +20,8 @@ $newChild = new ChildProfiles(NULL, NULL, NULL, NULL, NULL, NULL, NULL, $_POST['
 $newArray = $newChild->convertAsArray();
 $newChildId = ChildProfilesRepository::addChild(json_encode($newArray));
 $child = ChildProfilesRepository::getChildById($newChildId);
+$result = $child->convertAsArray();
+echo json_encode($child);
 // Read request parameters
 //$firstName = $_REQUEST["firstName"];
 //$lastName = $_REQUEST["lastName"]; // Store values in an array
