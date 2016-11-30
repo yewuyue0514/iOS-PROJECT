@@ -139,12 +139,36 @@ class ChildProfilesRepository {
     public static function addChild($json) {
         global $db;
         $child = ChildProfiles::initFromJson($json);
-        $mom_id = $child->getMom_id();
-        $dad_id = $child->getDad_id();
-        $emer1id = $child->getEmer_1_id();
-        $emer2id = $child->getEmer_2_id();
-        $medicalhisid = $child->getMedical_history_id();
-        $medicalcareid = $child->getMedical_care_id();
+        if ($child->getMom_id() == NULL) {
+            $mom_id = 'null';
+        } else {
+            $mom_id = $child->getMom_id();
+        }
+        if ($child->getDad_id() == NULL) {
+            $dad_id = 'null';
+        } else {
+            $dad_id = $child->getDad_id();
+        }
+        if ($child->getEmer_1_id() == NULL) {
+            $emer1id = 'null';
+        } else {
+            $emer1id = $child->getEmer_1_id();
+        }
+        if ($child->getEmer_2_id() == NULL) {
+            $emer2id = 'null';
+        } else {
+            $emer2id = $child->getEmer_2_id();
+        }
+        if ($child->getMedical_history_id() == NULL) {
+            $medicalhisid = 'null';
+        } else {
+            $medicalhisid = $child->getMedical_history_id();
+        }
+        if ($child->getMedical_care_id() == NULL) {
+            $medicalcareid = 'null';
+        } else {
+            $medicalcareid = $child->getMedical_care_id();
+        }
         $enrollment_date = $child->getEnrollment_date();
         $start_date = $child->getStart_date();
         $withdraw_date = $child->getWithdraw_date();
