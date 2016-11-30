@@ -164,9 +164,9 @@ class ChildProfilesRepository {
                   medical_care_id, enrollment_date, start_date, withdraw_date, withdraw_reason,
                   first_name, last_name, chinese_name, nick_name, sex, age, birthday, primary_language,
                   address, phone, child_status) VALUES ($mom_id, $dad_id, $emer1id, $emer2id, $medicalhisid,
-                  $medicalcareid, $enrollment_date, $start_date, $withdraw_date, $withdraw_reason,
-                  $first_name, $last_name, $chinese_name, $nick_name, $sex, $age, $birthday, $primary_language,
-                  $address, $phone, $child_status)";
+                  $medicalcareid, '$enrollment_date', '$start_date', '$withdraw_date', '$withdraw_reason',
+                  '$first_name', '$last_name', '$chinese_name', '$nick_name', '$sex', '$age', '$birthday', '$primary_language',
+                  '$address', '$phone', '$child_status')";
         $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         try {
             $db->query($query);
