@@ -4,14 +4,14 @@
  * Student Info: Name=Wei Jin, ID=9983
  * Subject: NPU_2016_Fall_CS556(A)_Team_Project
  * Author: Wei Jin 
- * Filename: index.php 
+ * Filename: json_test.php 
  * Date and Time: Nov 27, 2016 9:24:33 PM 
  * Project Name: CS556_Team_Project 
  */    
-include_once 'model/child_profiles_repository.php';
-include_once 'model/child_profiles.php';
-include_once 'db/db_context.php';
-require 'db/db_connect.php';
+include_once '../model/child_profiles_repository.php';
+include_once '../model/child_profiles.php';
+include_once '../db/db_context.php';
+require '../db/db_connect.php';
 $db = DBContext::getDB();
 
 $columnIndex = array();

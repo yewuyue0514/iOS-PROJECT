@@ -90,19 +90,45 @@ class EmergencyContactProfilesRepository {
         $relationship = $emergencyContactProfile->getRelationship();
         $first_name = $emergencyContactProfile->getFirst_name();
         $last_name = $emergencyContactProfile->getLast_name();
-        $chinese_name = $emergencyContactProfile->getChinese_name();
-        $home_phone_number = $emergencyContactProfile->getHome_phone_number();
-        $occupation = $emergencyContactProfile->getOccupation();
-        $work_time = $emergencyContactProfile->getWork_time();
-        $work_phone_number = $emergencyContactProfile->getWork_phone_number();
+        if($emergencyContactProfile->getChinese_name() == NULL){
+            $chinese_name = NULL;
+        }else{
+            $chinese_name = $emergencyContactProfile->getChinese_name();
+        }
+        if($emergencyContactProfile->getHome_phone_number() == NULL){
+            $home_phone_number = NULL;
+        }else{
+            $home_phone_number = $emergencyContactProfile->getHome_phone_number();
+        }
+       if($emergencyContactProfile->getOccupation() == NULL){
+           $occupation = NULL;
+       } else{
+           $occupation = $emergencyContactProfile->getOccupation();
+       }
+        if($emergencyContactProfile->getWork_time() == NULL){
+            $work_time = NULL;
+        }else{
+            $work_time = $emergencyContactProfile->getWork_time();
+        }
+        if($emergencyContactProfile->getWork_phone_number() == NULL){
+            $work_phone_number = NULL;
+        }else{
+            $work_phone_number = $emergencyContactProfile->getWork_phone_number();
+        }
         $cell_phone_number = $emergencyContactProfile->getCell_phone_number();
-        $note = $emergencyContactProfile->getNote();
-        $query = "INSERT INTO daycaredb.emergency_contact_profiles (relationship, first_name, last_name, 
-                chinese_name, home_phone_number, occupation, work_time, work_phone_number, cell_phone_number, note) 
-                VALUES ('$relationship', '$first_name', '$last_name', 
-                '$chinese_name', $home_phone_number, '$occupation', '$work_time', $work_phone_number, $cell_phone_number, '$note')";
-        $db->query($query);
-        return $db->lastInsertId();
+        if($emergencyContactProfile->getNote() == NULL){
+            $note = NULL;
+        }else{
+            $note = $emergencyContactProfile->getNote();
+        }
+        $query = "INSERT INTO daycaredb.emergency_contact_profiles (relationship, first_name, last_name, chinese_name, home_phone_number, occupation, work_time, work_phone_number, cell_phone_number, note) VALUES ('$relationship', '$first_name', '$last_name', '$chinese_name', $home_phone_number, '$occupation', '$work_time', $work_phone_number, $cell_phone_number, '$note')";
+        $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        try {
+            $db->query($query);
+            return $db->lastInsertId();
+        } catch (PDOException $ex) {
+            return array('id'=>$query, 'error'=>$ex->getMessage());
+        }
     }
 
 }

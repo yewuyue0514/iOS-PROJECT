@@ -113,24 +113,47 @@ class DailyRecordsRepository {
     // take a $signInRecord as parameter
     // insert into DB and return the "id" as integer which auto assign by the database
     // or return 0 if insert failed
-    public static function addDailyRecord($json) {
-        global $db;
-        $dailyRecord = DailyRecords::initFromjson($json);
+    public static function addDailyRecord($dailyRecord) {
+        global $db;       
+        //$dailyRecord = DailyRecords::initFromjson($json);
         $child_id = $dailyRecord->getChild_id();
         $record_date = $dailyRecord->getRecord_date();
-        $emotion = $dailyRecord->getEmotion();
+        if($dailyRecord->getEmotion() == NULL){
+            $emotion = NULL;
+        }else{
+            $emotion = $dailyRecord->getEmotion();
+        }
         $sleep_duration = $dailyRecord->getSleep_duration();
         $body_temperature = $dailyRecord->getBody_temperature();
         $defecation = $dailyRecord->getDefecation();
-        $meal = $dailyRecord->getMeal();
-        $activity = $dailyRecord->getActivity();
-        $defecation_at_home = $dailyRecord->getDefecation_at_home();
-        $sleep_status = $dailyRecord->getSleep_status();
-        $query = "INSERT INTO daycaredb.daily_records (child_id, record_date, emotion, sleep_duration, body_temperature, 
-            defecation, meal, activity, defecation_at_home, sleep_status) VALUES ($child_id, '$record_date', '$emotion', '$sleep_duration', $body_temperature, 
-            $defecation, '$meal', '$activity', $defecation_at_home, '$sleep_status')";
-        $db->query($query);
-        return $db->lastInsertId();
+        if($dailyRecord->getMeal() == NULL){
+            $meal = NULL;
+        }else{    
+            $meal = $dailyRecord->getMeal();
+        }
+        if($dailyRecord->getActivity() == NULL){
+            $activity = NULL;
+        }else{
+            $activity = $dailyRecord->getActivity();
+        }
+        if($dailyRecord->getDefecation_at_home()){
+            $defecation_at_home = NULL;
+        }else{
+            $defecation_at_home = $dailyRecord->getDefecation_at_home();
+        }
+        if($dailyRecord->getSleep_status() == NULL){
+            $sleep_status = NULL;
+        }else{
+            $sleep_status = $dailyRecord->getSleep_status();
+        }
+        $query = "INSERT INTO daycaredb.daily_records (child_id, record_date, emotion, sleep_duration, body_temperature, defecation, meal, activity, defecation_at_home, sleep_status) VALUES ($child_id, '$record_date', '$emotion', '$sleep_duration', $body_temperature, $defecation, '$meal', '$activity', $defecation_at_home, '$sleep_status')";
+        $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        try {
+            $db->query($query);
+            return $db->lastInsertId();
+        } catch (PDOException $ex) {
+            return array('id'=>$query, 'error'=>$ex->getMessage());
+        }
     }
 
 }

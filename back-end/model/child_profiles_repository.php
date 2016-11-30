@@ -170,20 +170,48 @@ class ChildProfilesRepository {
             $medicalcareid = $child->getMedical_care_id();
         }
         $enrollment_date = $child->getEnrollment_date();
-        $start_date = $child->getStart_date();
-        $withdraw_date = $child->getWithdraw_date();
-        $withdraw_reason = $child->getWithdraw_reason();
+        if($child->getStart_date() == NULL){
+            $start_date = NULL;
+        }else{
+            $start_date = $child->getStart_date();
+        }
+        if($child->getWithdraw_date() == NULL){
+            $withdraw_date = NULL;
+        }else{
+            $withdraw_date = $child->getWithdraw_date();
+        }
+        if($child->getWithdraw_reason() == NULL){
+            $withdraw_reason = NULL;
+        }else{
+            $withdraw_reason = $child->getWithdraw_reason();
+        }
         $first_name = $child->getFirst_name();
         $last_name = $child->getLast_name();
-        $chinese_name = $child->getChinese_name();
-        $nick_name = $child->getNick_name();
+        if($child->getChinese_name() == NULL){
+            $chinese_name = NULL;
+        }else{
+            $chinese_name = $child->getChinese_name();
+        }
+        if($child->getNick_name() == NULL){
+            $nick_name =NULL;
+        }else{
+            $nick_name = $child->getNick_name();
+        }
+        if($child->getPhone() == NULL){
+            $phone = NULL;
+        }else{
+            $phone = $child->getPhone();
+        }
+        if($child->getChild_status() == NULL){
+            $child_status = NULL;
+        }else{
+            $child_status = $child->getChild_status();
+        }
         $sex = $child->getSex();
         $age = $child->getAge();
         $birthday = $child->getBirthday();
         $primary_language = $child->getPrimary_language();
         $address = $child->getAddress();
-        $phone = $child->getPhone();
-        $child_status = $child->getChild_status();
         $query = "INSERT INTO daycaredb.child_profiles (mom_id, dad_id, emer_1_id, emer_2_id,medical_history_id,medical_care_id, enrollment_date, start_date, withdraw_date, withdraw_reason,first_name, last_name, chinese_name, nick_name, sex, age, birthday, primary_language,address, phone, child_status) VALUES ($mom_id, $dad_id, $emer1id, $emer2id, $medicalhisid,$medicalcareid, '$enrollment_date', '$start_date', '$withdraw_date', '$withdraw_reason','$first_name', '$last_name', '$chinese_name', '$nick_name', '$sex', '$age', '$birthday', '$primary_language','$address', '$phone', '$child_status')";
         $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         try {
