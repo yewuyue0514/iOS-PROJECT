@@ -25,8 +25,8 @@ $newChildId = ChildProfilesRepository::addChild($input);
 //$result = $child->convertAsArray();
 //echo json_encode($result);
 //$result = $child->convertAsArray();
-$result = array('id'=>$newChildId);
-echo json_encode($result);
+//$result = array('id'=>$newChildId);
+echo json_encode($newChildId);
 //echo json_encode($result);
 // Read request parameters
 //$firstName = $_REQUEST["firstName"];

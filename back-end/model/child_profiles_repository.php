@@ -190,7 +190,7 @@ class ChildProfilesRepository {
             $db->query($query);
             return $db->lastInsertId();
         } catch (PDOException $ex) {
-            return $query;
+            return array('id'=>$query, 'error'=>$ex->getMessage());
         }
     }
 
