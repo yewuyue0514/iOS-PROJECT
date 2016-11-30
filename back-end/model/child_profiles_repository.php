@@ -11,14 +11,14 @@
 
 class ChildProfilesRepository {
 
-    // return all records as an array
+// return all records as an array
     public static function getChilds() {
         global $db;
         $query = "SELECT * FROM daycaredb.child_profiles ORDER BY id";
         $result = $db->query($query);
         $childs = array();
         foreach ($result as $row) {
-            //impelement the child class
+//impelement the child class
             $child = new ChildProfiles($row['id'], $row['mom_id'], $row['dad_id'], $row['emer_1_id'], $row['emer_2_id']
                     , $row['medical_history_id'], $row['medical_care_id'], $row['enrollment_date'], $row['start_date']
                     , $row['withdraw_date'], $row['withdraw_reason'], $row['first_name'], $row['last_name']
@@ -29,14 +29,14 @@ class ChildProfilesRepository {
         return $childs;
     }
 
-    // return one record by id, or NULL if no match 
+// return one record by id, or NULL if no match 
     public static function getChildById($childId) {
         global $db;
         $query = "SELECT count(*) FROM daycaredb.child_profiles WHERE id = $childId";
-        if ($result = $db->query($query)) { 
-            // Check the number of rows that match the SELECT statement 
+        if ($result = $db->query($query)) {
+// Check the number of rows that match the SELECT statement 
             if ($result->fetchColumn() > 0) {
-                // Issue the real SELECT statement and work with the results 
+// Issue the real SELECT statement and work with the results 
                 $query = "SELECT * FROM daycaredb.child_profiles WHERE id = $childId";
                 $result = $db->query($query);
                 $row = $result->fetch();
@@ -52,14 +52,14 @@ class ChildProfilesRepository {
         }
     }
 
-    // return one record by first name and last name, or NULL if no match 
+// return one record by first name and last name, or NULL if no match 
     public static function getChildsByName($fname, $lname) {
         global $db;
         $query = "SELECT count(*) FROM daycaredb.child_profiles WHERE first_name = '$fname' AND last_name = '$lname'";
-        if ($result = $db->query($query)) { 
-            // Check the number of rows that match the SELECT statement 
+        if ($result = $db->query($query)) {
+// Check the number of rows that match the SELECT statement 
             if ($result->fetchColumn() > 0) {
-                // Issue the real SELECT statement and work with the results 
+// Issue the real SELECT statement and work with the results 
                 $query = "SELECT * FROM daycaredb.child_profiles WHERE first_name = '$fname' AND last_name = '$lname'";
                 $childs = array();
                 foreach ($db->query($query) as $row) {
@@ -77,14 +77,14 @@ class ChildProfilesRepository {
         }
     }
 
-    // return one record by chinese name, or NULL if no match 
+// return one record by chinese name, or NULL if no match 
     public static function getChildsByChineseName($name) {
         global $db;
         $query = "SELECT count(*) FROM daycaredb.child_profiles WHERE chinese_name = '$name'";
-        if ($result = $db->query($query)) { 
-            // Check the number of rows that match the SELECT statement 
+        if ($result = $db->query($query)) {
+// Check the number of rows that match the SELECT statement 
             if ($result->fetchColumn() > 0) {
-                // Issue the real SELECT statement and work with the results 
+// Issue the real SELECT statement and work with the results 
                 $query = "SELECT * FROM daycaredb.child_profiles WHERE chinese_name = '$name'";
                 $childs = array();
                 foreach ($db->query($query) as $row) {
@@ -102,14 +102,14 @@ class ChildProfilesRepository {
         }
     }
 
-    // return one record by phone number, or NULL if no match 
+// return one record by phone number, or NULL if no match 
     public static function getChildsByPhone($phone) {
         global $db;
         $query = "SELECT count(*) FROM daycaredb.child_profiles WHERE phone = $phone";
-        if ($result = $db->query($query)) { 
-            // Check the number of rows that match the SELECT statement 
+        if ($result = $db->query($query)) {
+// Check the number of rows that match the SELECT statement 
             if ($result->fetchColumn() > 0) {
-                // Issue the real SELECT statement and work with the results 
+// Issue the real SELECT statement and work with the results 
                 $query = "SELECT * FROM daycaredb.child_profiles WHERE phone = $phone";
                 $childs = array();
                 foreach ($db->query($query) as $row) {
@@ -127,7 +127,7 @@ class ChildProfilesRepository {
         }
     }
 
-    // remove one record from DB, return 1 if record remove successed or 0 if failed
+// remove one record from DB, return 1 if record remove successed or 0 if failed
     public static function deleteChild($childId) {
         global $db;
         $query = "DELETE FROM daycaredb.child_profiles WHERE id = $childId";
@@ -135,9 +135,9 @@ class ChildProfilesRepository {
         return $row_count;
     }
 
-    // take a $child as parameter, insert into DB and return the "id" as integer which auto assign by the database, 0 if failed
+// take a $child as parameter, insert into DB and return the "id" as integer which auto assign by the database, 0 if failed
     public static function addChild($json) {
-        global $db;        
+        global $db;
         $child = ChildProfiles::initFromJson($json);
         $mom_id = $child->getMom_id();
         $dad_id = $child->getDad_id();
@@ -164,11 +164,16 @@ class ChildProfilesRepository {
                   medical_care_id, enrollment_date, start_date, withdraw_date, withdraw_reason,
                   first_name, last_name, chinese_name, nick_name, sex, age, birthday, primary_language,
                   address, phone, child_status) VALUES ($mom_id, $dad_id, $emer1id, $emer2id, $medicalhisid,
-                  $medicalcareid, '$enrollment_date', '$start_date', '$withdraw_date', '$withdraw_reason',
-                  '$first_name', '$last_name', '$chinese_name', '$nick_name', '$sex', '$age', '$birthday', '$primary_language',
-                  '$address', '$phone', '$child_status')";
-        $db->query($query);
-        return $db->lastInsertId();
+                  $medicalcareid, $enrollment_date, $start_date, $withdraw_date, $withdraw_reason,
+                  $first_name, $last_name, $chinese_name, $nick_name, $sex, $age, $birthday, $primary_language,
+                  $address, $phone, $child_status)";
+        $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        try {
+            $db->query($query);
+            return $db->lastInsertId();
+        } catch (PDOException $ex) {
+            return $ex->getMessage();
+        }
     }
 
 }
