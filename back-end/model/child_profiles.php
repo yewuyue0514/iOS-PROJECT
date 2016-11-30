@@ -247,7 +247,7 @@ class ChildProfiles {
         $result['nick_name'] = $this->getNick_name();
         $result['sex'] = $this->getSex();
         $result['age'] = $this->getAge();
-        $result['birthdate'] = $this->getBirthday();
+        $result['birthday'] = $this->getBirthday();
         $result['primary_language'] = $this->getPrimary_language();
         $result['address'] = $this->getAddress();
         $result['phone'] = $this->getPhone();
