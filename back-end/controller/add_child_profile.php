@@ -4,7 +4,7 @@
  * Student Info: Name=Tsai-Chang Mai, ID=10010
  * Subject: NPU_2016_Fall_CS556(A)_Team_Project
  * Author: Arvin
- * Filename: test.php 
+ * Filename: add_child_profile.php 
  * Date and Time: Nov 28, 2016 10:46:50 PM 
  * Project Name: CS556_Team_Project 
  */
@@ -19,17 +19,5 @@ $newChild = new ChildProfiles(NULL, NULL, NULL, NULL, NULL, NULL, NULL, $_POST['
         , $_POST['birthday'], $_POST['primary_language'], $_POST['address'], $_POST['phone'], $_POST['child_status']);
 $newArray = $newChild->convertAsArray();
 $input = json_encode($newArray);
-//echo json_encode($newArray);
 $newChildId = ChildProfilesRepository::addChild($input);
-//$child = ChildProfilesRepository::getChildById(1);
-//$result = $child->convertAsArray();
-//echo json_encode($result);
-//$result = $child->convertAsArray();
-//$result = array('id'=>$newChildId);
-echo json_encode($newChildId);
-//echo json_encode($result);
-// Read request parameters
-//$firstName = $_REQUEST["firstName"];
-//$lastName = $_REQUEST["lastName"]; // Store values in an array
-//$returnValue = array("firstName" => $firstName, "lastName" => $lastName); // Send back request in JSON format
-//echo json_encode($returnValue);
+echo json_encode(array('id'=>$newChildId));
