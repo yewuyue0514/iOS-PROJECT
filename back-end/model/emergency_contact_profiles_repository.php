@@ -32,7 +32,7 @@ class EmergencyContactProfilesRepository {
         $query = "SELECT count(*) FROM daycaredb.emergency_contact_profiles WHERE id = $id";
         if ($result = $db->query($query)) {
             // Check the number of rows that match the SELECT statement 
-            if ($result->fetchColumn() === 1) {
+            if ($result->fetchColumn() == 1) {
                 // Issue the real SELECT statement and work with the results 
                 $query = "SELECT * FROM daycaredb.emergency_contact_profiles WHERE id = $id";
                 $result = $db->query($query);
@@ -84,9 +84,9 @@ class EmergencyContactProfilesRepository {
     // take a $signInRecord as parameter
     // insert into DB and return the "id" as integer which auto assign by the database
     // or return 0 if insert failed
-    public static function addEmergencyContactProfile($json) {
+    public static function addEmergencyContactProfile($emergencyContactProfile) {
         global $db;
-        $emergencyContactProfile = EmergencyContactProfiles::initFromJson($json);
+        //$emergencyContactProfile = EmergencyContactProfiles::initFromJson($json);
         $relationship = $emergencyContactProfile->getRelationship();
         $first_name = $emergencyContactProfile->getFirst_name();
         $last_name = $emergencyContactProfile->getLast_name();

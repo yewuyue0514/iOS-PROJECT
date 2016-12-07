@@ -36,7 +36,7 @@ class DailyRecords {
         return $newDailyRecord;
     }
     function convertToJson(){
-        $data = $this->convertAsArray();        
+        $data = $this->converAsArray();        
         return json_encode($data);
     }
     function getId() {
@@ -139,5 +139,6 @@ class DailyRecords {
         $result['activity'] = $this->getActivity();
         $result['defecation_at_home'] = $this->getDefecation_at_home();
         $result['sleep_status'] = $this->getSleep_status();
+        return $result;
     }
 }

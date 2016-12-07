@@ -17,7 +17,5 @@ $newChild = new ChildProfiles(NULL, NULL, NULL, NULL, NULL, NULL, NULL, $_POST['
         , $_POST['start_date'], $_POST['withdraw_date'], $_POST['withdraw_reason'], $_POST['first_name']
         , $_POST['last_name'], $_POST['chinese_name'], $_POST['nick_name'], $_POST['sex'], $_POST['age']
         , $_POST['birthday'], $_POST['primary_language'], $_POST['address'], $_POST['phone'], $_POST['child_status']);
-$newArray = $newChild->convertAsArray();
-$input = json_encode($newArray);
-$newChildId = ChildProfilesRepository::addChild($input);
+$newChildId = ChildProfilesRepository::addChild($newChild);
 echo json_encode(array('id'=>$newChildId));

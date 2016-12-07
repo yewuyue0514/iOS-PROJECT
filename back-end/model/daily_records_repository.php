@@ -33,7 +33,7 @@ class DailyRecordsRepository {
         $query = "SELECT count(*) FROM daycaredb.daily_records WHERE id = $id";
         if ($result = $db->query($query)) {
             // Check the number of rows that match the SELECT statement 
-            if ($result->fetchColumn() === 1) {
+            if ($result->fetchColumn() == 1) {
                 // Issue the real SELECT statement and work with the results 
                 $query = "SELECT * FROM daycaredb.daily_records WHERE id = $id";
                 $result = $db->query($query);

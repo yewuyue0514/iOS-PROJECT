@@ -14,13 +14,13 @@ include_once '../db/db_context.php';
 require '../db/db_connect.php';
 $db = DBContext::getDB();
 
-//$emergencyContactProfiles = EmergencyContactProfilesRepository::getEmergencyContactProfiles();
+$emergencyContactProfiles = EmergencyContactProfilesRepository::getEmergencyContactProfiles();
 //$emergencyContactProfile = EmergencyContactProfilesRepository::getEmergencyContactProfileById(2);
 //$emergencyContactProfiles = EmergencyContactProfilesRepository::getEmergencyContactProfilesByChildId(1);
 //$emergencyContactProfile = new EmergencyContactProfiles('','father','t','qq','ww',5101111111,'sales','weekday',5108122231,4565232345,'aswr');
 //$emergencyContactProfileid = EmergencyContactProfilesRepository::addEmergencyContactProfile($emergencyContactProfile);
 //$rows = EmergencyContactProfilesRepository::deleteEmergencyContactProfileById(2); echo "$rows --------";
-$emergencyContactProfiles = EmergencyContactProfilesRepository::getEmergencyContactProfiles();
+//$emergencyContactProfiles = EmergencyContactProfilesRepository::getEmergencyContactProfiles();
 $hasemergencyrecords = isset($emergencyContactProfiles); 
 if ($hasemergencyrecords === false) {
     echo "<h1>needs $emergencyContactProfile</h1>";

@@ -36,7 +36,7 @@ class EmergencyContactProfiles {
         return $newDailyRecord;
     }
     function convertToJson(){
-        $data = $this->convertAsArray();        
+        $data = $this->converAsArray();        
         return json_encode($data);
     }
     function getId() {
@@ -139,5 +139,6 @@ class EmergencyContactProfiles {
         $result['work_phone_number'] = $this->getWork_phone_number();
         $result['cell_phone_number'] = $this->getCell_phone_number();
         $result['note'] = $this->getNote();
+        return $result;
     }
 }
