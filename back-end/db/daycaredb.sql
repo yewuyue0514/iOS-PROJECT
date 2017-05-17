@@ -69,7 +69,7 @@ CREATE TABLE IF NOT EXISTS daycaredb.emergency_contact_profiles (
 );
 
 # create table for child's medical history
-CREATE TABLE IF NOT EXISTS daycaredb.medical_history_records (
+CREATE TABLE IF NOT EXISTS daycaredb.medical_history_profiles (
     # unique medical history records id
     id INT AUTO_INCREMENT UNIQUE,
     # child's height in cm (front-end will need to convert back and force to inches)
